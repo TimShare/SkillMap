@@ -15,7 +15,6 @@ AsyncSessionLocal = sessionmaker(
 
 
 async def get_session() -> AsyncGenerator[AsyncSession, None]:
-    """Получить async сессию БД"""
     async with AsyncSessionLocal() as session:
         try:
             yield session

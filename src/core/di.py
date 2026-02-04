@@ -8,6 +8,5 @@ from src.service.user import UserService
 async def get_user_service(
     session: AsyncSession = Depends(get_session),
 ) -> UserService:
-    """Получить сервис пользователей (DI контейнер)"""
     repo = UserRepository(session)
     return UserService(repo)

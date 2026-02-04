@@ -10,29 +10,23 @@ class UserService:
         self.user_repository = user_repository
 
     async def create_user(self, user: UserDTO) -> uuid.UUID:
-        """Создать нового пользователя"""
         if not user.name or not user.email or not user.hashed_password:
             raise ValueError("name, email and password are required for user creation")
         user.hashed_password = hash_password(user.hashed_password)
         return await self.user_repository.create(user)
 
     async def get_user(self, user_id: uuid.UUID) -> UserDTO:
-        """Получить пользователя по ID"""
         return await self.user_repository.get(user_id)
 
     async def update_user(self, user_id: uuid.UUID, user: UserDTO) -> UserDTO:
-        """Обновить пользователя"""
         updates = user.model_dump(exclude_unset=True, exclude={"id"})
-        # Hash password if provided and non-empty
         if "hashed_password" in updates:
             if updates["hashed_password"]:
                 updates["hashed_password"] = hash_password(updates["hashed_password"])
             else:
-                # Remove empty password from updates
                 del updates["hashed_password"]
         return await self.user_repository.update(user_id, updates)
 
     async def deactivate_user(self, user_id: uuid.UUID) -> None:
-        """Деактивировать пользователя"""
         await self.user_repository.deactivate(user_id)
 

@@ -33,14 +33,14 @@
     'detail': list([
       dict({
         'ctx': dict({
-          'reason': 'The email address is not valid. It must have exactly one @-sign.',
+          'reason': 'An email address must have an @-sign.',
         }),
         'input': 'not-an-email',
         'loc': list([
           'body',
           'email',
         ]),
-        'msg': 'value is not a valid email address: The email address is not valid. It must have exactly one @-sign.',
+        'msg': 'value is not a valid email address: An email address must have an @-sign.',
         'type': 'value_error',
       }),
     ]),
@@ -163,14 +163,14 @@
     'detail': list([
       dict({
         'ctx': dict({
-          'reason': 'The email address is not valid. It must have exactly one @-sign.',
+          'reason': 'An email address must have an @-sign.',
         }),
         'input': 'missing-at-sign.com',
         'loc': list([
           'body',
           'email',
         ]),
-        'msg': 'value is not a valid email address: The email address is not valid. It must have exactly one @-sign.',
+        'msg': 'value is not a valid email address: An email address must have an @-sign.',
         'type': 'value_error',
       }),
     ]),
@@ -181,14 +181,14 @@
     'detail': list([
       dict({
         'ctx': dict({
-          'reason': 'The email address is not valid. It must have exactly one @-sign.',
+          'reason': 'An email address must have an @-sign.',
         }),
         'input': 'not-an-email',
         'loc': list([
           'body',
           'email',
         ]),
-        'msg': 'value is not a valid email address: The email address is not valid. It must have exactly one @-sign.',
+        'msg': 'value is not a valid email address: An email address must have an @-sign.',
         'type': 'value_error',
       }),
     ]),
