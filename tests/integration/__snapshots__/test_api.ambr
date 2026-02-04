@@ -1,0 +1,233 @@
+# serializer version: 1
+# name: TestUserAPI.test_create_multiple_users
+  list([
+    dict({
+      'email': 'test@example.com',
+      'is_active': True,
+      'is_public': True,
+      'name': 'Test User',
+    }),
+    dict({
+      'email': 'ivan@example.com',
+      'is_active': True,
+      'is_public': False,
+      'name': 'Иван Иванов',
+    }),
+  ])
+# ---
+# name: TestUserAPI.test_create_user_duplicate_email
+  dict({
+    'detail': 'User with this email already exists',
+  })
+# ---
+# name: TestUserAPI.test_create_user_success
+  dict({
+    'email': 'test@example.com',
+    'is_active': True,
+    'is_public': True,
+    'name': 'Test User',
+  })
+# ---
+# name: TestUserAPI.test_create_user_validation_errors[invalid_data0-422]
+  dict({
+    'detail': list([
+      dict({
+        'ctx': dict({
+          'reason': 'The email address is not valid. It must have exactly one @-sign.',
+        }),
+        'input': 'not-an-email',
+        'loc': list([
+          'body',
+          'email',
+        ]),
+        'msg': 'value is not a valid email address: The email address is not valid. It must have exactly one @-sign.',
+        'type': 'value_error',
+      }),
+    ]),
+  })
+# ---
+# name: TestUserAPI.test_create_user_validation_errors[invalid_data1-422]
+  dict({
+    'detail': list([
+      dict({
+        'input': dict({
+          'email': 'test@example.com',
+          'name': 'Test',
+        }),
+        'loc': list([
+          'body',
+          'password',
+        ]),
+        'msg': 'Field required',
+        'type': 'missing',
+      }),
+    ]),
+  })
+# ---
+# name: TestUserAPI.test_create_user_validation_errors[invalid_data2-422]
+  dict({
+    'detail': list([
+      dict({
+        'input': dict({
+          'email': 'test@example.com',
+          'password': 'Pass123!',
+        }),
+        'loc': list([
+          'body',
+          'name',
+        ]),
+        'msg': 'Field required',
+        'type': 'missing',
+      }),
+    ]),
+  })
+# ---
+# name: TestUserAPI.test_delete_user_not_found
+  dict({
+    'detail': 'User not found',
+  })
+# ---
+# name: TestUserAPI.test_full_user_lifecycle
+  dict({
+    'created': dict({
+      'email': 'test@example.com',
+      'is_active': True,
+      'is_public': True,
+      'name': 'Test User',
+    }),
+    'deactivated': dict({
+      'email': 'test@example.com',
+      'is_active': False,
+      'is_public': False,
+      'name': 'Updated Name',
+    }),
+    'updated': dict({
+      'email': 'test@example.com',
+      'is_active': True,
+      'is_public': False,
+      'name': 'Updated Name',
+    }),
+  })
+# ---
+# name: TestUserAPI.test_get_user_invalid_uuid
+  dict({
+    'detail': list([
+      dict({
+        'ctx': dict({
+          'error': 'invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `n` at 1',
+        }),
+        'input': 'not-a-uuid',
+        'loc': list([
+          'path',
+          'user_id',
+        ]),
+        'msg': 'Input should be a valid UUID, invalid character: expected an optional prefix of `urn:uuid:` followed by [0-9a-fA-F-], found `n` at 1',
+        'type': 'uuid_parsing',
+      }),
+    ]),
+  })
+# ---
+# name: TestUserAPI.test_get_user_not_found
+  dict({
+    'detail': 'User with id <UUID> not found',
+  })
+# ---
+# name: TestUserAPI.test_get_user_success
+  dict({
+    'email': 'test@example.com',
+    'is_active': True,
+    'is_public': True,
+    'name': 'Test User',
+  })
+# ---
+# name: TestUserAPI.test_update_user_invalid_email[@no-local-part.com]
+  dict({
+    'detail': list([
+      dict({
+        'ctx': dict({
+          'reason': 'There must be something before the @-sign.',
+        }),
+        'input': '@no-local-part.com',
+        'loc': list([
+          'body',
+          'email',
+        ]),
+        'msg': 'value is not a valid email address: There must be something before the @-sign.',
+        'type': 'value_error',
+      }),
+    ]),
+  })
+# ---
+# name: TestUserAPI.test_update_user_invalid_email[missing-at-sign.com]
+  dict({
+    'detail': list([
+      dict({
+        'ctx': dict({
+          'reason': 'The email address is not valid. It must have exactly one @-sign.',
+        }),
+        'input': 'missing-at-sign.com',
+        'loc': list([
+          'body',
+          'email',
+        ]),
+        'msg': 'value is not a valid email address: The email address is not valid. It must have exactly one @-sign.',
+        'type': 'value_error',
+      }),
+    ]),
+  })
+# ---
+# name: TestUserAPI.test_update_user_invalid_email[not-an-email]
+  dict({
+    'detail': list([
+      dict({
+        'ctx': dict({
+          'reason': 'The email address is not valid. It must have exactly one @-sign.',
+        }),
+        'input': 'not-an-email',
+        'loc': list([
+          'body',
+          'email',
+        ]),
+        'msg': 'value is not a valid email address: The email address is not valid. It must have exactly one @-sign.',
+        'type': 'value_error',
+      }),
+    ]),
+  })
+# ---
+# name: TestUserAPI.test_update_user_not_found
+  dict({
+    'detail': 'User not found',
+  })
+# ---
+# name: TestUserAPI.test_update_user_password
+  dict({
+    'email': 'test@example.com',
+    'is_active': True,
+    'is_public': True,
+    'name': 'Test User',
+  })
+# ---
+# name: TestUserAPI.test_update_user_success[update_data0]
+  dict({
+    'email': 'test@example.com',
+    'is_active': True,
+    'is_public': True,
+    'name': 'Updated Name',
+  })
+# ---
+# name: TestUserAPI.test_update_user_success[update_data1]
+  dict({
+    'email': 'test@example.com',
+    'is_active': True,
+    'is_public': False,
+    'name': 'Test User',
+  })
+# ---
+# name: TestUserAPI.test_update_user_success[update_data2]
+  dict({
+    'email': 'test@example.com',
+    'is_active': True,
+    'is_public': False,
+    'name': 'New Name',
+  })
+# ---
